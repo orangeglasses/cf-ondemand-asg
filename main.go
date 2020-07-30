@@ -94,7 +94,10 @@ func main() {
 	}
 
 	log.Println("Connecting to CF API")
-	client, _ := cfclient.NewClient(c)
+	client, err := cfclient.NewClient(c)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 
 	synchHandler := reqHandler{
 		cfClient: client,
