@@ -47,7 +47,7 @@ func (h reqHandler) synchOrg(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		responseBody.Success = false
 		responseBody.Message = err.Error()
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(responseBody)
 		return
 	}
