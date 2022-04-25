@@ -80,15 +80,20 @@ func main() {
 
 	appEnv, _ := cfenv.Current()
 	cfg, err := configLoad()
+	if err != nil {
+		log.Fatal("Error loading config: ", err)
+	}
 
 	c := &cfclient.Config{
 		ApiAddress: appEnv.CFAPI,
 	}
 
 	if cfg.CFClient == "" {
+		fmt.Println("Using CF_USER")
 		c.Username = cfg.CFUser
 		c.Password = cfg.CFPassword
 	} else {
+		fmt.Println("Using CF_CLIENT")
 		c.ClientID = cfg.CFClient
 		c.ClientSecret = cfg.CFPassword
 	}
