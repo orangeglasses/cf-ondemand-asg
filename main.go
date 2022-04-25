@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/cloudfoundry-community/go-cfclient"
 	"github.com/cloudfoundry-community/go-cfenv"
@@ -80,17 +79,18 @@ func (h reqHandler) synchOrg(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	appEnv, _ := cfenv.Current()
-	user := os.Getenv("CFUSER")
-	password := os.Getenv("CFPASSWORD")
-
-	if user == "" || password == "" {
-		log.Fatal("Please provide CFUSER and CFPASSWORD environment variables")
-	}
+	cfg, err := configLoad()
 
 	c := &cfclient.Config{
 		ApiAddress: appEnv.CFAPI,
-		Username:   user,
-		Password:   password,
+	}
+
+	if cfg.CFClient == "" {
+		c.Username = cfg.CFUser
+		c.Password = cfg.CFPassword
+	} else {
+		c.ClientID = cfg.CFClient
+		c.ClientSecret = cfg.CFPassword
 	}
 
 	log.Println("Connecting to CF API")

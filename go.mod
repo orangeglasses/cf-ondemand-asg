@@ -8,6 +8,7 @@ require (
 	github.com/cloudfoundry-community/go-cfenv v1.18.0
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/gorilla/mux v1.7.4
+	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/pkg/errors v0.9.1 // indirect
 	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
 	golang.org/x/oauth2 v0.0.0-20201208152858-08078c50e5b5 // indirect
