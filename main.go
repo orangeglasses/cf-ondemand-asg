@@ -95,7 +95,7 @@ func main() {
 	} else {
 		fmt.Println("Using CF_CLIENT")
 		c.ClientID = cfg.CFClient
-		c.ClientSecret = cfg.CFPassword
+		c.ClientSecret = cfg.CFSecret
 	}
 
 	log.Println("Connecting to CF API")
